@@ -1,3 +1,4 @@
 core
 .gdb_history
 a.out
+peda-session-*
