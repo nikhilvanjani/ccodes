@@ -1,0 +1,3 @@
+https://www.interviewbit.com/problems/find-duplicate-in-array/
+https://www.interviewbit.com/problems/spiral-order-matrix-ii/ -- som2.c
+https://www.interviewbit.com/problems/sorted-permutation-rank-with-repeats/ -- sorted-permutation-with-repeats.c
