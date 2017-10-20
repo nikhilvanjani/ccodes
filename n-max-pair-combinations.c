@@ -9,12 +9,17 @@
  * 
  * @Output Integer array. You need to malloc memory, and fill the length in len1
  */
+
+int idx=0;
+int C[1000];
+int n=0;
+
 void swap(int*a, int*b){
     int t=*a;
     *a=*b;
     *b=t;
 } 
- 
+
 int partition(int A[], int low, int high){
     int pivot=A[low];
     int i=low+1,j=high;
@@ -45,66 +50,114 @@ void quicksort(int A[],int low, int high){
     }
 }
 
-int C[1000];
-int idx=0;
+
+void heapify(int **a, int m,int n){
+    if((m+1)>(n/2)) return;
+    int x;  
+    if((m==(n/2)-1)&&(n%2==0))  x=2*m+1;    
+    else{
+        if(a[2*m+1][0]>=a[2*m+2][0])
+            x=2*m+1;        
+        else
+            x=2*m+2;    
+    }   
+    if(a[m][0]<a[x][0]){      
+        swap(&a[m][0],&a[x][0]);
+        swap(&a[m][1],&a[x][1]);
+        swap(&a[m][2],&a[x][2]);
+        m=x;
+        heapify(a,m,n);
+    }
+    else    return;
     
+}
+int* extractMax(int **a){
+    int *x=(int*)malloc(3*sizeof(int));
+    x[0]=a[0][0];
+    x[1]=a[0][1];
+    x[2]=a[0][2];
+    a[0][0]=a[n-1][0];
+    a[0][1]=a[n-1][1];
+    a[0][2]=a[n-1][2];
+    n--;
+    heapify(a,0,n);
+    return x;
+}
+
+void insert(int A[],int i,int B[],int j,int **a){
+    //printf("check41 n=%d\n",n);
+    a[n][0]=A[i]+B[j];
+    //printf("check42\n");
+    a[n][1]=i;
+    //printf("check43\n");
+    a[n][2]=j;
+    //printf("check44\n");
+    n++;
+    //printf("check45\n");
+    int m=n-1;
+    //printf("check5\n");
+    while((a[m][0]>a[(m-1)/2][0])&&(m>=0)){
+        //printf("check6 m=%d\n",m );
+        swap(&a[m][0],&a[(m-1)/2][0]);
+        swap(&a[m][1],&a[(m-1)/2][1]);
+        swap(&a[m][2],&a[(m-1)/2][2]);
+        m=(m-1)/2;
+    }
+}
+
+int isInserted(int A[],int i, int B[], int j, int **a){
+    int flag=0,k;
+    for(k=0;k<n;k++){
+        if((a[k][1]==i)&&(a[k][2]==j)){
+            flag=1;
+            break;
+        }
+    }
+    return flag;
+
+}
 int* solve(int* A, int n1, int* B, int n2, int *len1) {
-    //printf("n1=%d\n",n1 );
+    ////printf("n1=%d\n",n1 );
     static int flag=1;
-    if(flag==1){
-        quicksort(A,0,n1-1);
-        quicksort(B,0,n2-1);
-        flag=0;
-    }
-    int i,j;
-    int val=A[1]+B[1];;
-    i=0;
-    //printf("check1\tidx=%d\n",idx);
-    while((A[0]+B[i]>=val)&&(idx<3*n1)&&(i<n2)){
-        C[idx]=A[0]+B[i];
-        //printf("C[%d]=%d\n",idx,C[idx]);
-        i++;
-        idx++;
-    }
-    i=1;
-    //printf("check2\tidx=%d\n",idx);
-    while((A[i]+B[0]>=val)&&(idx<3*n1)&&(i<n1)){
-        C[idx]=A[i]+B[0];
-        //printf("C[%d]=%d\n",idx,C[idx]);
-        i++;
-        idx++;
-    }
-    //printf("check3\tidx=%d\n",idx);
-    if(idx<3*n1){
-        int*len2=(int*)malloc(sizeof(int));
-        solve(A+1,n1-1,B+1,n2-1,len2);
-    }
-    //printf("check4\n");
+    quicksort(A,0,n1-1);
+    quicksort(B,0,n2-1);
     *len1=n1;
-    for(i=0;i<idx;i++)
-        //printf("%d ",C[i]);
-    //printf("\n");
-    quicksort(C,0,idx-1);
-    int*D=(int*)malloc(n1*sizeof(int));
-    for(i=0;i<n1;i++)
-        D[i]=C[i];
-    return D;
+    int i,j;
+    int**a=(int**)malloc(3*n1*sizeof(int));
+    for(i=0;i<3*n1;i++)
+        a[i]=(int*)malloc(3*sizeof(int));
+    i=0,j=0;
+    //printf("check3\n");
+    insert(A,i,B,j,a);
+    //printf("check4\n");
+    int *d=(int*)malloc(3*sizeof(int));
+    while(idx<n1){
+        //printf("check4\n");
+        d=extractMax(a);
+        C[idx]=d[0];
+        idx++;
+        if(isInserted(A,d[1],B,d[2]+1,a)==0)  
+            insert(A,d[1],B,d[2]+1,a);    
+        if(isInserted(A,d[1]+1,B,d[2],a)==0)  
+            insert(A,d[1]+1,B,d[2],a);    
+    }
+    return C;
     
 }
 
-
 int main(){
-    int n1,n2;
-    scanf("%d%d",&n1,&n2);
-    int A[n1],B[n2];
+    int n1;
+    scanf("%d",&n1);
+    int A[n1],B[n1];
     int i;
     for(i=0;i<n1;i++)
         scanf("%d",&A[i]);
-    for(i=0;i<n2;i++)
+    for(i=0;i<n1;i++)
         scanf("%d",&B[i]);
     int*len1=(int*)malloc(sizeof(int));
-    int *C=solve(A,n1,B,n2,len1);
-    //printf("len1=%d\n",*len1);
+    //printf("check1\n");
+    solve(A,n1,B,n1,len1);
+    //printf("check2\n");
     for(i=0;i<*len1;i++)
         printf("%d ",C[i]);
     printf("\n");

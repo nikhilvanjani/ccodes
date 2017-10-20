@@ -18,9 +18,58 @@ int main(){
 	// printf("%d\n",y);
 	// printf("%c\n",x);
 	// printf("%d\n",z);
-	char a[10];
-	scanf("%s",a);
-	printf("%s\n",a );
+	
+	// char a[10];
+	// scanf("%s",a);
+	// printf("%s\n",a );
+
+	// int a[3]={1,2,3};
+	// int b[3]={4,5,6};
+	// int i;
+	// for(i=0;i<3;i++)
+	// 	printf("%d ",a[i]);
+	// printf("\n");
+	// for(i=0;i<3;i++)
+	// 	printf("%d ",b[i]);
+	// printf("\n");
+	// //a=b;
+	// for(i=0;i<3;i++)
+	// 	a[i]=b[i];
+	
+	// for(i=0;i<3;i++)
+	// 	printf("%d ",a[i]);
+	// printf("\n");
+	
+	// int *a=(int*)malloc(3*sizeof(int));
+	// a[0]=1,a[1]=2,a[2]=3;
+	// int b[3]={4,5,6};
+	// int i;
+	// for(i=0;i<3;i++)
+	// 	printf("%d ",a[i]);
+	// printf("\n");
+	// for(i=0;i<3;i++)
+	// 	printf("%d ",b[i]);
+	// printf("\n");
+	// a=b;
+	// // for(i=0;i<3;i++)
+	// // 	a[i]=b[i];
+	
+	// for(i=0;i<3;i++)
+	// 	printf("%d ",a[i]);
+	// printf("\n");
+
+	int b[3]={1,2,3};
+	//b=(int*)b;
+	int*a=(int*)malloc(3*sizeof(int));
+	a=(int*)b;
+	int i;
+	for(i=0;i<3;i++)
+		printf("%d ",b[i]);
+	printf("\n");
+
+	for(i=0;i<3;i++)
+		printf("%d ",a[i]);
+	printf("\n");
 
 	return 0;
 }
