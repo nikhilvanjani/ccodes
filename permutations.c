@@ -8,10 +8,12 @@
  * @Output 2D int array. You need to malloc memory. Fill in len1 as row, len2 as columns 
  */
 
-int C[1000];
-int flag=1;
+// int C[1000];
+// int flag=1;
 
 int ** permute(int* A, int n1, int *len1, int *len2) {
+    static int flag=1;
+    static int C[1000];
     int i,j;
     if(flag==1){
         for(i=0;i<1000;i++)
@@ -62,11 +64,11 @@ int ** permute(int* A, int n1, int *len1, int *len2) {
 
 int main(){
     int n1;
-    scanf("%d\n",&n1);
+    scanf("%d",&n1);
     int A[n1];
     int i,j;
     for(i=0;i<n1;i++)
-        scanf("%d ",&A[i]);
+        scanf("%d",&A[i]);
     int *len1=(int*)malloc(sizeof(int));
     int *len2=(int*)malloc(sizeof(int));
     int **B=permute(A,n1,len1,len2);
@@ -75,5 +77,6 @@ int main(){
             printf("%d ",B[i][j]);
         printf("\n");
     }
+    printf("len1=%d len2=%d\n",*len1,*len2);
     return 0;
 }
