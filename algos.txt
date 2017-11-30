@@ -1,0 +1,261 @@
+Data Structures
+===============
+	Elementary Data Structures
+		Array
+		List
+		Stack			
+!			8-Queens problem
+			Expression evaluation
+		Queue
+			Finding shortest path in a grid
+	Hierarchial Data Structures
+		Heap
+			Query oeration
+				Find-min:
+			Update operation
+				CreateHeap(H): create an empty heap H
+				Insert(x,H): insert a new key with value x into the heap H
+				ExtractMin(H): delete the smallest key from H
+				DecreaseKey(p,delta,H): decrease the value of key p by amount delta
+				Merge(H1,H2): merge two heaps H1 and H2
+			Types
+				Binary heap
+					Find-min: O(1)
+					InsertHeap(x,H): O(log n)
+					ExtractMin(H): O(log n)
+					DecreaseKey(p,delta,H): O(log n)
+					Merge(H1,H2): O(n) -- due to array implementation
+				Binomial Heap
+				Fibonacci Heap
+					Find-min: O(1)
+					InsertHeap(x,H): O(1)
+					ExtractMin(H): O(log n)
+					DecreaseKey(p,delta,H): O(1)
+					Merge(H1,H2): O(1)
+				Soft Heap
+			Building Heap
+				Top down approach: T=O(nlogn)
+				Bottom up approach: T=O(n) 
+		Binary Search Tree (BST)
+			Nearly balanced BST : 
+				For any arbitrary sequence of 'n' operations, T=O(n log n)
+				Worst case search time = O(log n)
+	Hash Tables
+	Augmented Data Structures -- most fascinating and powerful
+
+Algorithm paradigms
+===================
+	Divide and Conquer
+	Greedy Strategy
+	Dynamic Programming
+	Local Search
+
+Fibonacci Numbers
+-----------------
+	recursive : T=O(2^n) 
+	iterative : T=O(n) = 3n
+	Clever-algo-Fib : T=O(log n) = 35 log (n-1)+11
+
+
+Subset sum problem
+------------------
+Given an array 'A' storing 'n' numbers and a number 's', determine if there is a subset of numbers from A whose sum is 's'
+!	fastest existing algo - T=O(2^(n/2))
+
+Sorting
+-------
+	Selection sort :
+	Merge sort : 
+	Quick sort : 
+
+Max-sum subarray
+----------------
+Given : an array 'A' storing 'n' numbers
+Aim : Find subarray of 'A' sum of whose elements is maximum
+	Trivial algo : T=O(n^3)
+	Optimal algo : T=O(n), extra space = O(1)
+
+Local minima in an array (Divide and Conquer)
+------------------------
+Given : an array 'A' of 'n' distict nubmers
+Output : any local minima
+	Optimal algo : T=O(log n)
+
+Local mimima in a grid (Divide and Conquer)
+----------------------
+Given : (n x n) grid storing distinct nubmers
+Output : any local minima
+	Trivial Algo : T=O(n log n)	
+	Optimal algo : T=O(n)
+!	Adversarial approach: T=Omega(n)
+	
+
+range minima problem
+--------------------
+given : an array 'A' storing 'n' numbers
+aim : a data structure to answer a sequence of queries of the following type - 
+Range-minima(i,j) = report smalles element from A[i],...A[j]
+	Applications : Computational geometry, string matching, as an efficient subroutine in a variety of algorithms
+	1D - Query time = O(1), space = O(n log n), preprocessing time = O(n^2 log n) (trivial), O(n log n) (non-trivial)
+!	2D - query time = O(log n)
+!	1D -O(n) space and O(1) query time
+
+Range-1-Query
+-------------
+Given : a (n x n) matrix comprising of 0s and 1s
+Aim : determine if a rectangle has atleast one 1
+	T=O(1), space=O(n^2), preprocessing time = O(n^2)
+
+Data Structure for integers
+---------------------------
+!	searching in O(log log n) time
+
+
+Majority Element
+----------------
+Def: given a numtiset S of 'n' elements, 'x' is said to be m-majority element if it appears more than 'n/m' times in S
+Problem: given a multiset S of 'n' elements, find the manority element, if any, in S           
+	2-Majority problem
+		Trivial Algo 1: T=O(n^2)
+		Trivial Algo 2: T=O(n log n)
+		Efficient Algo 1: T=O(n), extra space=O(n), multiple scans
+		Efficient Algo 2: T=O(n), extra space=O(1), single scan
+!	3-Majority problem
+
+Multiplication of 2 n-bit numbers
+---------------------------------
+	Trivial algo : T=O(n^2)
+	Divide and Conquer algo : T=O(n^(log 3 base 2))= O(n^1.58)
+
+Counting inversions in an array (Divide and Conquer)
+-------------------------------
+	Trivial algo : T=O(n^2)
+	Efficient algo 1: T=O(n log^2 n)
+	Efficient algo 2: T=O(n log n), similar to merge sort
+
+Graph Algorithms
+================
+	are two vertices x and y connected ? -- graph traversal problem -- bfs, dfs
+	find all conected componenets in a graph -- bfs
+	is there a cycle in the graph -- bfs
+	compute shortest path between two vertices -- bfs
+!	is there a cycle passing through all vertices?
+
+	
+Finding a sink in the graph
+---------------------------
+problem: given a directed graph in an adjacency matrix representation, design an O(n) time algo to find if there is a sink
+
+Bredth First Search (BFS)
+-------------------------
+	T=O(m+n)
+	Applications:
+		determine if a graph is bipartite
+		are two vertices x and y connected ?
+			pre-processing time: O(m+n), extra space=O(n), query time=O(1)
+
+Depth First Search (DFS)
+------------------------
+	T=O(m+n)
+	Applications:
+		Connected components of a graph
+				augmented DFS/BFS: T=O(m+n)
+		biconnected components of a graph (is the connectivity of a graph robust to failure of any node?)
+				trivial BFS/DFS : T=O(mn)
+				optimal -1 DFS traversal: T=O(m+n)
+!		Finding bridges in a graph (is the connectivity of a graph robust to failure of any edge?)
+!		Planarity testing of a graph (can a graph be embedded on a pane so that no two edges intersect?)
+!		Strongly connected components of a directed graph (the extension of connectivity in directed graphs)
+
+Problems on Sequences
+---------------------
+	Problem1: given an initial sequence of numbers, maintain a compact data structure to perform the following operations-
+		Trivial Solution- array based:
+			ReportElement(i): T=O(1)
+			Multi-Increment(i,j,delta): T=O(n)
+		Complete Binary Tree based solution:
+			ReportElement(i): T=O(logn)
+			Multi-Increment(i,j,delta): T=O(logn)
+	Problem2: Dynamic Range Minima
+		Trivial Solution- array based:
+			ReportMin(i,j): T=O(n)
+			Update(i,a): T=O(1)
+		Complete Binary Tree based solution:
+			ReportMin(i,j): T=O(logn)
+			Update(i,a): T=O(logn)
+!	Problem3: compact data structure for ReportMin(i,j) and Multi-Increment(i,j,delta)
+!	Challenging Problem: compact data structure for ReportMin(i,j), Multi-Increment(i,j,delta), Rotate(i,j)
+	Problem4: data struture for sets :
+		Given: a collection of n singleton sets
+		Aim: a compact data sturcture to perform-
+			Union(i,j): unite sets containing i and j
+			Same_sets(i,j): 	determine if i,j are in same set
+		Trivial Solution 1- an array of labels
+			Union(i,j): T=O(n)
+			Same_sets(i,j): T=O(1)
+		Trivial Solution 2- treat as a graph problem
+			Union(i,j): T=O(n)
+			Same_sets(i,j): T=O(1)
+		Efficient data structure: Reverse binary tree
+			Find(i) operation: find root of tree containing i
+			T(Union(i,j))=T(Same_sets(i,j))=T(Find(i)) always
+			Trivial hueristic:
+				Find(i): T=O(n)
+			Hueristic 1: Union by size
+				Find(i): T=O(logn)
+			Hueristic 2: Path Compression
+				given a collection of n singletons, 
+				Time for a sequence of m uninon and find operations=O(m+nlog*n)
+
+ith order static of set S
+-------------------------
+Given a set S of n elements, find ith smallest element of S
+	Trivial Solution: Sort S, T=O(nlogn)
+	QuickSelect(S,i) algoritm: Avg case T = O(n), Worst case T=O(n^2)
+	Select(S,i) algorithm: Worst case T=O(n) -- divide and conquer
+
+Greedy Strategy
+===============
+	Job Scheduling
+	--------------
+	Largest subset of non-overlapping jobs -- earliest finish time approach
+		trivial algo: T=O(n^2)
+		Sort by finish time algo: T=O(nlogn)
+
+	Minimum Spanning Tree (MST)
+	---------------------------
+		Cut/Cycle property based trivial solution: T=O(mn)
+!		Optimal Solution: T=O(m logn)
+	Mobile Towers on a road
+	-----------------------
+		Greedy solution based on sorting : T=O(n logn)
+
+Shortest path from a source to a destination 
+--------------------------------------------
+	Djikstra's algorithm : T=O(n^2)
+
+Counting Sort
+-------------
+given n numbers in range [0,k-1], sort them
+	T=O(n+k), extra space=O(k)
+Radix Sort
+----------
+give n numbers in range [o,n^t], sort them
+	T=O(tn), extra space=O(n)
+
+Searching among integers
+------------------------
+!	Hash Tables based solution
+		Preprocessing Time - avg T = O(n)
+		Extra Space = O(n)
+		Query Time = O(1)
+
+Locating 1 problem
+------------------
+There is an array of n numbers, n-1 of which are 0 and one of them is 1. Find its location
+T=O(n), T=Omega(n)
+Locating 0 problem
+------------------
+There is an array of n numbers, with i st A[i]=0, for all j<i, A[j-1]<A[j] and for all j>i, A[j]>A[j+1]. Find i
+T=O(n), T=Omega(n)
+!	I think we can improve this !!
